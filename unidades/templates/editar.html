@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{# ============================= Corpo ================================== #}
+{% block 'body' %}
+{% include "partials/navbar.html" %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md d-flex justify-content-center">
+            <div class="cont-cadastro">
+                <br>
+                <section class="cont-logo">
+                    <br><br>
+                    <img class="logo" src="{% static 'img/logo.png' %}">
+                    <label class="text-logo">SALDO QUE FALTA AGENDAR</label>
+
+                    <p class="fonte-destaque1 d-flex justify-content-center align-items-center">
+                        <span class="p-bold text-start">Alterar Registro</span>
+                    </p>
+                </section>
+                {#==========================================================================#}
+                <form action="{% url 'editar_saldo' saldo_editado.id %}" method="post">{% csrf_token %}
+
+                    {% if messages %}
+                    <br>
+                        {% for message in messages %}
+                            <section class="alert {{message.tags}}">
+                                {{message}}
+                            </section>
+                        {% endfor %}
+                    {% endif %}
+                    <br>
+                    <label for="">Data:</label>
+                    <label type="date" name="data" id="" style="background-color:aliceblue;" class="form-control shadow-main-color">{{saldo_editado.data | date:"d/m/Y"}}</label>
+                    <br>    
+                    <label for="">Filiais</label>
+                    <label type="text" name="data" id="" style="background-color:aliceblue;" class="form-control shadow-main-color">{{saldo_editado.filial}}</label>
+                    <br>
+                    <label for="">TERGRASA</label>
+                    <input type="number" name="tergrasa" style="color:blue;" class="form-control shadow-main-color" value="{{saldo_editado.tergrasa}}" placeholder="">
+                    <br>
+                    <label for="">TERMASA</label>
+                    <input type="number" name="termasa" style="color:blue;" class="form-control shadow-main-color" value="{{saldo_editado.termasa}}" placeholder="Drrrrrrrrrrrr">
+                    <br>
+                    <input type="submit" value="Alterar" class="btn btn-info">
+                    <a href="{% url 'home' %}" class="btn btn-outline-info">Voltar</a>
+                </form>
+                {#==========================================================================#}
+            </div>
+        </div>
+        <div class="col-md bg-main1 d-flex justify-content-center">
+            <div class="cont-cadastro">     
+                <br><br><br><br>
+                <p class="bg-main-lembrete" style="text-align: center;">
+                <span class="p-bold text-start"><i class="bi bi-exclamation-triangle-fill icon-differential"></i>&nbsp&nbspQUANTIDADES PENDENTE DE AGENDAMENTO</span>
+                <table class="table table-bordered border-primary">
+                    <thead style="background-color:#1D3D74" >
+                      <tr>
+                        <th>Data</th>
+                        <th>Unidade</th>
+                        <th>Tergrasa</th>
+                        <th>Termasa</th>
+                        <th>Ação</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in saldos %}
+                      {% if i.id == idd %}  
+                      <tr>
+                        <td style="color:blue">{{i.data_formatada}}</td>
+                        <td style="color:blue" class="text-start">{{i.filial.nome}}</th>
+                        <td style="color:blue">{{i.tergrasa}}</td>
+                        <td style="color:blue">{{i.termasa}}</td>
+                        <td>
+                            <input class="botao-cancelar" type="reset" onclick="location.href='/unidades/home'" value="Cancela"> 
+                        </td>
+                     {% comment %} {% else %} 
+                       <tr>
+                        <td >{{i.data_formatada}}</td>
+                        <td class="text-start">{{i.filial.nome}}</th>
+                        <td>{{i.tergrasa}}</td>
+                        <td>{{i.termasa}}</td>
+                        <td>
+                            <input class="botao-cancelar" type="reset"  value="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp">
+                        </td>
+                      </tr> {% endcomment %}
+                      {% endif %} 
+                    {% endfor i %}
+                      {% comment %} <tr>
+                        <th colspan="2">Total</th>
+                        <th>{{tg}}</th>
+                        <th>{{tm}}</th>
+                        <th>{{soma}}</th>
+                      </tr> {% endcomment %}
+                    </tbody>
+                </table>
+            </div> 
+        </div>   
+    </div>
+</div>
+{% endblock 'body' %}
+
+

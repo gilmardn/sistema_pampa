@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{# ============================= Corpo ================================== #}
+{% block 'body' %}
+{% include "partials/navbar.html" %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md d-flex justify-content-center">
+                <div class="cont-cadastro">
+                    <br>
+                    <br>
+                    <section class="cont-logo">
+                        <br><br>
+                        <img class="logo" src="{% static 'img/logo.png' %}">
+                        <label class="text-logo">SALDO QUE FALTA AGENDAR</label>
+
+                        <p class="fonte-destaque1 d-flex justify-content-center align-items-center">
+                            <span class="p-bold text-start">Cadastrar nova filial</span>
+                         </p>
+                       
+                        
+                    </section>
+                    <form action="{% url 'cadastro_filial' %}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+
+                        {% if messages %}
+                        <br>
+                            {% for message in messages %}
+                                <section class="alert {{message.tags}}">
+                                    {{message}}
+                                </section>
+                            {% endfor %}
+                        {% endif %}
+
+                        <br>
+                        <form action="{% url 'cadastro_filial' %}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="">Nome da Filial:</label>
+                                    <input type="text" class="form-control shadow-main-color" value="" name="nome" placeholder="Digite seu nome ...">
+
+
+                                </div>
+                                <div class="col-md">
+                                    <label for="">CNPJ</label>
+                                    <input type="text" name="cnpj" id="" class="form-control shadow-main-color">
+                                </div>
+                            </div>
+                            <br>
+                            <label for="">Rua</label>
+                            <input type="text" name="rua" id="" class="form-control shadow-main-color" placeholder="Endereço ...">
+                            <br>
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="">Bairro:</label>
+                                    <input type="text" class="form-control shadow-main-color" name="bairro" placeholder="Bairro ...">
+                                </div>
+                                <div class="col-md">
+                                    <label for="">Número:</label>
+                                    <input type="number" name="numero" id="" class="form-control shadow-main-color">
+                                </div>
+                            </div>
+                            <br>
+                            <label for="">Cidade</label>
+                            <input type="text" name="cidade" id="" class="form-control shadow-main-color" placeholder="Cidade ...">
+                            <br>
+                           
+                            <label for="">Foto de perfil:</label>
+                            <input type="file" name="foto" id="" class="form-control shadow-main-color">
+                            <br>
+                            <input type="submit" value="Cadastrar" class="btn btn-info">
+                            <a href="{% url 'login' %}" class="btn btn-outline-info">Voltar</a>
+                        </form>
+                </div>
+            </div>
+            <div class="col-md bg-main1 d-flex justify-content-center align-items-center">
+                <img src="{% static 'img/ilustracao1.png' %}" alt="">
+                <img src="{% static 'img/ilustracao.png' %}" alt="">
+                
+               
+            </div>
+        </div>
+    </div>
+{% endblock 'body' %}
+{# ====================================================================== #}

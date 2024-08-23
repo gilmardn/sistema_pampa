@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{# ============================= Corpo ================================== #}
+{% block 'body' %}
+{% include "partials/navbar.html" %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md d-flex justify-content-center">
+                <div class="cont-cadastro">
+                    <br>
+                    <br>
+                    <section class="cont-logo">
+                        <br><br>
+                        <img class="logo" src="{% static 'img/logo.png' %}">
+                        <label class="text-logo">SALDO QUE FALTA AGENDAR</label>
+                        <p class="fonte-destaque1 d-flex justify-content-center align-items-center">
+                            <span class="p-bold text-start">Cadastre-se</span>
+                        </p>
+                    </section>
+                    <form action="{% url 'cadastro' %}" method="post">{% csrf_token %}
+
+                        {% if messages %}
+                        <br>
+                            {% for message in messages %}
+                                <section class="alert {{message.tags}}">
+                                    {{message}}
+                                </section>
+                            {% endfor %}
+                        {% endif %}
+                        <br>
+                        <label for="">Usuario</label>
+                        <input type="text" name="username" id="" class="form-control shadow-main-color" placeholder="Usuario ...">
+                        <br>
+                        <label for="">Nome</label>
+                        <input type="text" name="first_name" id="" class="form-control shadow-main-color" placeholder="Nome ...">
+                        <br>
+                        <label for="">E-mail</label>
+                        <input type="text" name="email" id="" class="form-control shadow-main-color" placeholder="email@email.com" >
+                        <br>
+                        <div class="row">
+                            <div class="col-md">
+                                <label for="">Senha</label>
+                                <input type="password" name="senha" class="form-control shadow-main-color" placeholder="Digite sua senha ...">
+                            </div>
+                            <div class="col-md">
+                                <label for="">Confirmar senha</label>
+                                <input type="password" name="confirmar_senha" class="form-control shadow-main-color" placeholder="Digite sua senha novamente ..." id="">
+                            </div>
+                        </div>
+                        <br>
+                        <input type="submit" value="Cadastrar" class="btn btn-success btn-dark-color">
+                        <a href="{% url 'login' %}" class="btn btn-dark-color-outline">Já possuo uma conta</a>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md bg-main1 d-flex justify-content-center align-items-center">
+                    <img src="{% static 'img/ilustracao1.png' %}" alt="">
+                    <img src="{% static 'img/ilustracao.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+{% endblock 'body' %}
+{# ====================================================================== #}

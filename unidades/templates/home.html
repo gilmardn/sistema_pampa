@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{# ============================= Corpo ================================== #}
+{% block 'body' %}
+
+{% include "partials/navbar.html" %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md d-flex justify-content-center">
+            <div class="cont-cadastro">
+                <br>
+                <section class="cont-logo">
+                    <br><br>
+                    <img class="logo" src="{% static 'img/logo.png' %}">
+                    <label class="text-logo">SALDO QUE FALTA AGENDAR</label>
+                    <p class="fonte-destaque1 d-flex justify-content-center align-items-center">
+                       <span class="p-bold text-start">Incluir Registro</span>
+                    </p>
+
+                </section>
+                {#==========================================================================#}
+                <form action="{% url 'home' %}" method="post">{% csrf_token %}
+                    {% if messages %}
+                    <br>
+                        {% for message in messages %}
+                            <section class="alert {{message.tags}}">
+                                {{message}}
+                            </section>
+                        {% endfor %}
+                    {% endif %}
+                    <br>
+                    <label for="">Data:</label>
+                    <input type="date" name="data" id="" class="form-control shadow-main-color" value="">
+                    <br>    
+                    <label for="">Filiais</label>
+                        <select name="filial" class="form-select shadow-main-color" id="">
+                            {% for i in filiais %}
+                                <option value="{{i.id}}">{{i.nome}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                    <label for="">TERGRASA</label>
+                    <input type="number" name="tergrasa" class="form-control shadow-main-color" value="" placeholder="Digite o peso em toneladas">
+                    <br>
+                    <label for="">TERMASA</label>
+                    <input type="number" name="termasa" class="form-control shadow-main-color" value="" placeholder="Digite o peso em toneladas">
+                    <br>
+                    <input type="submit" value="Incluir" class="btn btn-info">
+                    <a href="{% url 'login' %}" class="btn btn-outline-info">Voltar</a>
+                </form>
+                 {#==========================================================================#}
+            </div>
+        </div>
+        <div class="col-md bg-main1 d-flex justify-content-center">
+            <div class="cont-cadastro">     
+                <br><br><br><br>
+                <p class="bg-main-lembrete" style="text-align: center;">
+                <span class="p-bold text-start"><i class="bi bi-exclamation-triangle-fill icon-differential"></i>&nbsp&nbspQUANTIDADES PENDENTE DE AGENDAMENTO</span>
+                </p>
+                <table class="table table-bordered border-primary">
+                    <thead style="background-color:#1D3D74" >
+                    <tr>
+                        <th scope="col" class="text-center">Data</th>
+                        <th>Unidade</th>
+                        <th class="text-center" scope="col">Tergrasa</th>
+                        <th class="text-center" scope="col">Termasa</th>
+                        <th class="text-center" scope="col">Ação</th>
+                       
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in saldos %}
+                    <tr>
+                        <td scope="row">{{i.data_formatada}}</td>
+                        <td class="text-start">{{i.filial.nome}}</th>
+                        <td class="text-center">{{i.tergrasa}}</td>
+                        <td class="text-center">{{i.termasa}}</td>
+                        <td>
+                            <input class="botao-alterar" type="reset" onclick="location.href='/unidades/editar_saldo/{{i.id}}'" value="Alterar"> 
+                        </td>
+                    </tr>                      
+                    </div>
+                {% endfor i %}
+                <tr>
+                    <th colspan="2" class="text-center">Total</th>
+                    <th class="text-center">{{tg}}</th>
+                    <th class="text-center">{{tm}}</th>
+                    <th></th>
+                  </tr>
+                    </tbody>
+                  </table>
+            </div> 
+        </div>   
+    </div>
+</div>
+
+ {#========================================= MODAL ===========================================================================================#}
+ 
+ {#============================================================================================================================================#}
+
+{% endblock 'body' %}
+
+
+
+
+
+  
+ 
