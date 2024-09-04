@@ -61,8 +61,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'pampa_db',
+        'USER': 'admin',
+        'PASSWORD': 'LEYUxGmmlsly1ekDJl2tSNr6Uv9D0lX3',
+        'HOST': 'dpg-crbrmp5svqrc73f3m9i0-a',
+        'PORT': '5432',
     }
 }
 
