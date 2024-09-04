@@ -65,12 +65,12 @@ DATABASES = {
         'NAME': 'pampa_db',
         'USER': 'admin',
         'PASSWORD': 'LEYUxGmmlsly1ekDJl2tSNr6Uv9D0lX3',
-        'HOST': 'dpg-crbrmp5svqrc73f3m9i0-a',
+        'HOST': 'dpg-crbrmp5svqrc73f3m9i0-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
 
-
+postgresql://admin:LEYUxGmmlsly1ekDJl2tSNr6Uv9D0lX3@dpg-crbrmp5svqrc73f3m9i0-a.oregon-postgres.render.com/pampa_db
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
