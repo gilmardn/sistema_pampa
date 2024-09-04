@@ -64,8 +64,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pampa_db',
         'USER': 'admin',
-        'PASSWORD': 'LEYUxGmmlsly1ekDJl2tSNr6Uv9D0lX3',
-        'HOST': 'dpg-crbrmp5svqrc73f3m9i0-a.oregon-postgres.render.com',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': '5432',
     }
 }
