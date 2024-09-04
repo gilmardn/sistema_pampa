@@ -1,45 +1,31 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-color-dark">
-  <div class="container-fluid">
+{# <nav class="navbar navbar-expand-lg navbar-dark dark-color"> #}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-color-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}" style="color:#f0cbcb;"><img style="border-radius: 13px;"
+          src="{% static 'img/logo_jpg.jpg' %}" width="20%" alt="" />&nbsp&nbspFALTA AGENDAR NO SISTEMA PAMPA</a>
+      <a class="nav-link active" style="color:#f0cbcb; padding: 15px;" href="{% url 'home' %}">Home</a>
+      <a class="nav-link active" style="color:#f0cbcb; padding: 15px;" aria-current="page"
+        href="{% url 'cadastro_filial' %}">Filiais</a>
+      <a class="nav-link active" style="color:#f0cbcb; padding: 15px;  margin-right: 1px;" href=""> Usuario:
+        {{user.username}} </a>
 
-    <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png' %}" width="20%" alt=""/>&nbsp&nbspTERMINAL MARITIMO</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" value="teste">
-      <span class="navbar-toggler-icon">
-        
-      </span>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav" style="margin-right: 80px;">
 
-      
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link active" style="color:#f0cbcb; padding: 15px; margin-right: 1px;"
+              href="{% url 'sair' %}">Sair</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link active" style="color:#f0cbcb; padding: 15px;" href="{% url 'login' %}">Entrar</a>
+          </li>
+          {% endif %}
 
-      
-      {% if is_authenticate %}
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login&nbsp&nbsp&nbsp</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'cadastro' %}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadatro de Usuarios&nbsp&nbsp&nbsp </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{% url 'cadastro_filial' %}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadatro de Filiais </a>
-        </li>
-      </ul>
-     
-      {% else %}
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login&nbsp&nbsp&nbsp</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'cadastro' %}">Cadatro de Usuarios&nbsp&nbsp&nbsp</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'cadastro_filial' %}">Cadatro de Filiais</a>
-        </li>
-      </ul>
-        {% endif %}
-      
+        </ul>
+
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>

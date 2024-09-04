@@ -27,18 +27,21 @@ def cadastro(request):
             return redirect('/usuarios/cadastro')
         
         try:
-            User.objects.create_user(
-                username=username,
-                first_name= nome,
-                email=email,
-                password=senha
-            )
+            User.objects.create_user(username=username, first_name=nome, email=email, password=senha)
+
+            user = auth.authenticate(request, username=username, password=senha) 
+            if user:
+                auth.login(request, user)
+                return redirect('/unidades/home')
             return redirect('/usuarios/login')
         except:
             messages.add_message(request, constants.ERROR, 'Erro ao salvar o Usuario.')
             return redirect('/usuarios/cadastro')
         
 def login_view(request):
+    if  request.user.is_authenticated:
+        return redirect('/unidades/home')
+    
     if request.method == "GET":
         return render(request, 'login.html')   
     elif request.method == "POST":

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
-
 {# ============================= Corpo ================================== #}
-{% block 'body' %}
 
+
+{% block 'body' %}
 {% include "partials/navbar.html" %}
 <div class="container-fluid">
     <div class="row">
@@ -11,65 +11,76 @@
             <div class="cont-cadastro">
                 <br>
                 <section class="cont-logo">
-                    <br><br>
-                    <img class="logo" src="{% static 'img/logo.png' %}">
-                    <label class="text-logo">SALDO QUE FALTA AGENDAR</label>
-                    <p class="fonte-destaque1 d-flex justify-content-center align-items-center">
-                       <span class="p-bold text-start">Incluir Registro</span>
-                    </p>
-
+                    <br>
+                     <br>
+                    {#========= Mensagem ============#}
+                    {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+                   {% endif %}
+                    {#================================#}
+                    <div class="alert alert" style="font-size: 25px; border: solid 0.5px #f08c00; background-color: #fef3e5; color: #0d8b44;" role="alert">
+                        <strong>Saldo que falta agendar</strong>
+                         </div>
                 </section>
+
                 {#==========================================================================#}
                 <form action="{% url 'home' %}" method="post">{% csrf_token %}
-                    {% if messages %}
                     <br>
-                        {% for message in messages %}
-                            <section class="alert {{message.tags}}">
-                                {{message}}
-                            </section>
-                        {% endfor %}
-                    {% endif %}
+                    <label for="">Data agendamento:</label>
+                   
+                    <input type="date" name="data" id="" value="{{ data_atual }}" class="form-control shadow-main-color">
+
                     <br>
-                    <label for="">Data:</label>
-                    <input type="date" name="data" id="" class="form-control shadow-main-color" value="">
-                    <br>    
                     <label for="">Filiais</label>
                         <select name="filial" class="form-select shadow-main-color" id="">
+                            <option value="">--------</option>
                             {% for i in filiais %}
                                 <option value="{{i.id}}">{{i.nome}}</option>
                             {% endfor %}
                         </select>
                         <br>
-                    <label for="">TERGRASA</label>
-                    <input type="number" name="tergrasa" class="form-control shadow-main-color" value="" placeholder="Digite o peso em toneladas">
+                    <label for="">TERGRASA (peso em toneladas)</label>
+                    <input type="number" name="tergrasa" class="form-control shadow-main-color" value="" placeholder="">
                     <br>
-                    <label for="">TERMASA</label>
-                    <input type="number" name="termasa" class="form-control shadow-main-color" value="" placeholder="Digite o peso em toneladas">
+                    <label for="">TERMASA (peso em toneladas)</label>
+                    <input type="number" name="termasa" class="form-control shadow-main-color" value="" placeholder="">
                     <br>
                     <input type="submit" value="Incluir" class="btn btn-info">
-                    <a href="{% url 'login' %}" class="btn btn-outline-info">Voltar</a>
+                    <a href="{% url 'home' %}" class="btn btn-outline-info">Voltar</a>
                 </form>
                  {#==========================================================================#}
             </div>
         </div>
         <div class="col-md bg-main1 d-flex justify-content-center">
-            <div class="cont-cadastro">     
-                <br><br><br><br>
-                <p class="bg-main-lembrete" style="text-align: center;">
-                <span class="p-bold text-start"><i class="bi bi-exclamation-triangle-fill icon-differential"></i>&nbsp&nbspQUANTIDADES PENDENTE DE AGENDAMENTO</span>
-                </p>
+            <div class="cont-cadastro">
+                <br><br><br>
+               
+
+                <div class="alert alert" 
+                    style="text-align: center; font-size: 18px; border: solid 0.5px #f08c00; background-color: #fef3e5; color: #0d8b44;" 
+                    role="alert">
+                    <strong><i class="bi bi-exclamation-triangle-fill icon-differential"></i>&nbsp&nbspQUANTIDADES PENDENTE DE AGENDAMENTO</strong>
+                </div>
+
+
+
                 <table class="table table-bordered border-primary">
-                    <thead style="background-color:#1D3D74" >
+                    <thead style="background-color:#1D3D74; border: solid 0.5px #f08c00;" >
                     <tr>
                         <th scope="col" class="text-center">Data</th>
                         <th>Unidade</th>
                         <th class="text-center" scope="col">Tergrasa</th>
                         <th class="text-center" scope="col">Termasa</th>
                         <th class="text-center" scope="col">Ação</th>
-                       
+
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="background-color:#1D3D74; border-radius: 20px; border: solid 0.5px #f08c00;">
                     {% for i in saldos %}
                     <tr>
                         <td scope="row">{{i.data_formatada}}</td>
@@ -77,9 +88,9 @@
                         <td class="text-center">{{i.tergrasa}}</td>
                         <td class="text-center">{{i.termasa}}</td>
                         <td>
-                            <input class="botao-alterar" type="reset" onclick="location.href='/unidades/editar_saldo/{{i.id}}'" value="Alterar"> 
+                            <input class="botao-alterar" type="reset" onclick="location.href='/unidades/editar_saldo/{{i.id}}'" value="Alterar">
                         </td>
-                    </tr>                      
+                    </tr>
                     </div>
                 {% endfor i %}
                 <tr>
@@ -90,14 +101,11 @@
                   </tr>
                     </tbody>
                   </table>
-            </div> 
-        </div>   
+            </div>
+        </div>
     </div>
 </div>
 
- {#========================================= MODAL ===========================================================================================#}
- 
- {#============================================================================================================================================#}
 
 {% endblock 'body' %}
 
@@ -105,5 +113,6 @@
 
 
 
-  
- 
+
+
+

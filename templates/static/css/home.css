@@ -20,15 +20,24 @@
 .icon-main{
     color: var(--main-color);
 }
+
+
+
 .bg-main-lembrete{
     background-color: var(--dark-color);
     padding: 10px;
-    color: white;
+    color: #f0cbcb;
+    border: solid 0.5px rgb(240, 140, 0);
+    border-radius: 20px;
 }
+
+
+
+
 .icon-differential{
     color: var(--contrast-color);
 }
-table {
+table1 {
     border-collapse: collapse !important;
     width: 100%;
 }
@@ -72,6 +81,14 @@ th {
     padding: 10px;
 }
 .documentos{
+    background-color: #cfcfcf;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.logo1{
     background-color: #cfcfcf;
     color: black;
     padding: 20px;

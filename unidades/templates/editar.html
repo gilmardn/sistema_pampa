@@ -1,38 +1,37 @@
 {% extends "base.html" %}
 {% load static %}
-
 {# ============================= Corpo ================================== #}
-{% block 'body' %}
-{% include "partials/navbar.html" %}
+ {% block 'body' %}
+ {% include "partials/navbar.html" %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-md d-flex justify-content-center">
             <div class="cont-cadastro">
                 <br>
+
                 <section class="cont-logo">
-                    <br><br>
-                    <img class="logo" src="{% static 'img/logo.png' %}">
-                    <label class="text-logo">SALDO QUE FALTA AGENDAR</label>
-
-                    <p class="fonte-destaque1 d-flex justify-content-center align-items-center">
-                        <span class="p-bold text-start">Alterar Registro</span>
-                    </p>
-                </section>
-                {#==========================================================================#}
-                <form action="{% url 'editar_saldo' saldo_editado.id %}" method="post">{% csrf_token %}
-
+                    <br>
+                     <br>
+                    {#========= Mensagem ============#}
                     {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+
+                    {% endfor %}
+                   {% endif %}
+                    {#================================#}
+                    <div class="alert alert" style="font-size: 22px; border: solid 0.5px #f08c00; background-color: #fef3e5; color: #0d8b44;" role="alert">
+                        <strong>Alterar Registro</strong>
+                    </div>
                     <br>
-                        {% for message in messages %}
-                            <section class="alert {{message.tags}}">
-                                {{message}}
-                            </section>
-                        {% endfor %}
-                    {% endif %}
-                    <br>
+                </section>
+                <form action="{% url 'editar_saldo' saldo_editado.id %}" method="post">{% csrf_token %}
                     <label for="">Data:</label>
                     <label type="date" name="data" id="" style="background-color:aliceblue;" class="form-control shadow-main-color">{{saldo_editado.data | date:"d/m/Y"}}</label>
-                    <br>    
+                    <br>
                     <label for="">Filiais</label>
                     <label type="text" name="data" id="" style="background-color:aliceblue;" class="form-control shadow-main-color">{{saldo_editado.filial}}</label>
                     <br>
@@ -40,7 +39,7 @@
                     <input type="number" name="tergrasa" style="color:blue;" class="form-control shadow-main-color" value="{{saldo_editado.tergrasa}}" placeholder="">
                     <br>
                     <label for="">TERMASA</label>
-                    <input type="number" name="termasa" style="color:blue;" class="form-control shadow-main-color" value="{{saldo_editado.termasa}}" placeholder="Drrrrrrrrrrrr">
+                    <input type="number" name="termasa" style="color:blue;" class="form-control shadow-main-color" value="{{saldo_editado.termasa}}" placeholder="">
                     <br>
                     <input type="submit" value="Alterar" class="btn btn-info">
                     <a href="{% url 'home' %}" class="btn btn-outline-info">Voltar</a>
@@ -49,32 +48,38 @@
             </div>
         </div>
         <div class="col-md bg-main1 d-flex justify-content-center">
-            <div class="cont-cadastro">     
-                <br><br><br><br>
-                <p class="bg-main-lembrete" style="text-align: center;">
-                <span class="p-bold text-start"><i class="bi bi-exclamation-triangle-fill icon-differential"></i>&nbsp&nbspQUANTIDADES PENDENTE DE AGENDAMENTO</span>
-                <table class="table table-bordered border-primary">
-                    <thead style="background-color:#1D3D74" >
+            <div class="cont-cadastro">
+                <br><br><br>
+                <div class="alert alert" 
+                style="text-align: center; font-size: 22px; border: solid 0.5px #f08c00; background-color: #fef3e5; color: #0d8b44;" 
+                role="alert">
+                <strong><i class="bi bi-exclamation-triangle-fill icon-differential"></i>&nbsp&nbspRegistro que sera alterado</strong>
+            </div>
+
+                <table class="table-bordered  border-primary" style="width: 100%;">
+
+                    <thead style="background-color:#1D3D74; border: solid 0.5px #f08c00;" >
                       <tr>
-                        <th>Data</th>
+                        <th scope="col" class="text-center">Data</th>
                         <th>Unidade</th>
-                        <th>Tergrasa</th>
-                        <th>Termasa</th>
-                        <th>Ação</th>
+                        <th class="text-center" scope="col">Tergrasa</th>
+                        <th class="text-center" scope="col">Termasa</th>
+                        <th class="text-center" scope="col">Ação</th>
+                     
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="background-color:#1D3D74; border-radius: 20px; border: solid 0.5px #f08c00;">
                     {% for i in saldos %}
-                      {% if i.id == idd %}  
+                      {% if i.id == idd %}
                       <tr>
                         <td style="color:blue">{{i.data_formatada}}</td>
                         <td style="color:blue" class="text-start">{{i.filial.nome}}</th>
                         <td style="color:blue">{{i.tergrasa}}</td>
                         <td style="color:blue">{{i.termasa}}</td>
                         <td>
-                            <input class="botao-cancelar" type="reset" onclick="location.href='/unidades/home'" value="Cancela"> 
+                            <input class="botao-cancelar" type="reset" onclick="location.href='/unidades/home'" value="Cancela">
                         </td>
-                     {% comment %} {% else %} 
+                     {% comment %} {% else %}
                        <tr>
                         <td >{{i.data_formatada}}</td>
                         <td class="text-start">{{i.filial.nome}}</th>
@@ -84,7 +89,7 @@
                             <input class="botao-cancelar" type="reset"  value="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp">
                         </td>
                       </tr> {% endcomment %}
-                      {% endif %} 
+                      {% endif %}
                     {% endfor i %}
                       {% comment %} <tr>
                         <th colspan="2">Total</th>
@@ -94,8 +99,8 @@
                       </tr> {% endcomment %}
                     </tbody>
                 </table>
-            </div> 
-        </div>   
+            </div>
+        </div>
     </div>
 </div>
 {% endblock 'body' %}
