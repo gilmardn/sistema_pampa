@@ -14,8 +14,8 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 
-ALLOWED_HOSTS = ['.pythonanywhere.com', "*"]
-
+#ALLOWED_HOSTS = ['.pythonanywhere.com', "*"]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -62,14 +62,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 '''
 DATABASES = {
@@ -83,7 +82,7 @@ DATABASES = {
     }
 }
 
-'''
+
 
 
 
