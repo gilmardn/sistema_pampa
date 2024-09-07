@@ -1,6 +1,7 @@
-import os
 from pathlib import Path
+import os
 from dotenv import load_dotenv
+
 
 load_dotenv()
 
@@ -11,11 +12,11 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = os.environ.get('DEBUG', '') != 'False'
 
 
-#ALLOWED_HOSTS = ['.pythonanywhere.com', "*"]
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['.pythonanywhere.com', "*"]
+
 
 # Application definition
 
@@ -62,29 +63,19 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
-'''
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': str(os.getenv('DB_NAME')),
+        'ENGINE': str(os.getenv('DB_ENGINE')),
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': os.getenv('DB_NAME'),
         'USER': str(os.getenv('DB_USER')),
-        'PASSWORD':str(os.getenv('DB_PASSWORD')),
+        'PASSWORD': str(os.getenv('DB_PASSWORD')),
         'HOST': str(os.getenv('DB_HOST')),
         'PORT': str(os.getenv('DB_PORT')),
     }
 }
-
-
-
-
 
 
 # postgresql://admin:LEYUxGmmlsly1ekDJl2tSNr6Uv9D0lX3@dpg-crbrmp5svqrc73f3m9i0-a.oregon-postgres.render.com/pampa_db
