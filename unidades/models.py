@@ -31,4 +31,6 @@ class Saldo(models.Model):
         return self.filial.nome
     
     def data_formatada(self):
-        return self.data.strftime('%d/%m/%Y')
+        return self.data.strftime('%d/%m/%y')
+    
+    

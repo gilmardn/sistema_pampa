@@ -1,118 +1,89 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 {% load static %}
-{# ============================= Corpo ================================== #}
 
 
-{% block 'body' %}
-{% include "partials/navbar.html" %}
-<div class="container-fluid">
+{% block 'principal' %}
+
+<!-- Begin page content -->
+<main>
+  <div class="container">
     <div class="row">
-        <div class="col-md d-flex justify-content-center">
-            <div class="cont-cadastro">
-                <br>
-                <section class="cont-logo">
-                    <br>
-                     <br>
-                    {#========= Mensagem ============#}
-                    {% if messages %}
-                    {% for message in messages %}
-                      <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
-                        {{message}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-                    {% endfor %}
-                   {% endif %}
-                    {#================================#}
-                    <div class="alert alert" style="font-size: 25px; border: solid 0.5px #f08c00; background-color: #fef3e5; color: #0d8b44;" role="alert">
-                        <strong>Saldo que falta agendar</strong>
-                         </div>
-                </section>
-
-                {#==========================================================================#}
-                <form action="{% url 'home' %}" method="post">{% csrf_token %}
-                    <br>
-                    <label for="">Data agendamento:</label>
-                   
-                    <input type="date" name="data" id="" value="{{ data_atual }}" class="form-control shadow-main-color">
-
-                    <br>
-                    <label for="">Filiais</label>
-                        <select name="filial" class="form-select shadow-main-color" id="">
-                            <option value="">--------</option>
-                            {% for i in filiais %}
-                                <option value="{{i.id}}">{{i.nome}}</option>
-                            {% endfor %}
-                        </select>
-                        <br>
-                    <label for="">TERGRASA (peso em toneladas)</label>
-                    <input type="number" name="tergrasa" class="form-control shadow-main-color" value="" placeholder="">
-                    <br>
-                    <label for="">TERMASA (peso em toneladas)</label>
-                    <input type="number" name="termasa" class="form-control shadow-main-color" value="" placeholder="">
-                    <br>
-                    <input type="submit" value="Incluir" class="btn btn-info">
-                    <a href="{% url 'home' %}" class="btn btn-outline-info">Voltar</a>
-                </form>
-                 {#==========================================================================#}
-            </div>
-        </div>
-        <div class="col-md bg-main1 d-flex justify-content-center">
-            <div class="cont-cadastro">
-                <br><br><br>
-               
-
-                <div class="alert alert" 
-                    style="text-align: center; font-size: 18px; border: solid 0.5px #f08c00; background-color: #fef3e5; color: #0d8b44;" 
-                    role="alert">
-                    <strong><i class="bi bi-exclamation-triangle-fill icon-differential"></i>&nbsp&nbspQUANTIDADES PENDENTE DE AGENDAMENTO</strong>
-                </div>
-
-
-
-                <table class="table table-bordered border-primary">
-                    <thead style="background-color:#1D3D74; border: solid 0.5px #f08c00;" >
-                    <tr>
-                        <th scope="col" class="text-center">Data</th>
-                        <th>Unidade</th>
-                        <th class="text-center" scope="col">Tergrasa</th>
-                        <th class="text-center" scope="col">Termasa</th>
-                        <th class="text-center" scope="col">Ação</th>
-
-                    </tr>
-                    </thead>
-                    <tbody style="background-color:#1D3D74; border-radius: 20px; border: solid 0.5px #f08c00;">
-                    {% for i in saldos %}
-                    <tr>
-                        <td scope="row">{{i.data_formatada}}</td>
-                        <td class="text-start">{{i.filial.nome}}</th>
-                        <td class="text-center">{{i.tergrasa}}</td>
-                        <td class="text-center">{{i.termasa}}</td>
-                        <td>
-                            <input class="botao-alterar" type="reset" onclick="location.href='/unidades/editar_saldo/{{i.id}}'" value="Alterar">
-                        </td>
-                    </tr>
-                    </div>
-                {% endfor i %}
-                <tr>
-                    <th colspan="2" class="text-center">Total</th>
-                    <th class="text-center">{{tg}}</th>
-                    <th class="text-center">{{tm}}</th>
-                    <th></th>
+      <div class="esquerda col-sm-6">
+        <div class="home-esquerda">
+        <div class="alert titulo" role="alert">
+          <strong>Saldo pendente de agendamento</strong>
+      </div>
+      {#==========================================================================#}
+      <div id="tabela">
+          <table class="table table-bordered" style="border: solid 0.5px #f08c00;">
+              <thead>
+                  <tr>
+                      <th scope="col" class="text-center">Data</th>
+                      <th class="text-start">Unidade</th>
+                      <th class="text-center" scope="col">Tergrasa</th>
+                      <th class="text-center" scope="col">Termasa</th>
+                      <th class="text-center" scope="col">Ação</th>
                   </tr>
-                    </tbody>
-                  </table>
-            </div>
-        </div>
+              </thead>
+              <tbody>
+                  {% for i in saldos %}
+                  <tr>
+                      <td class="text-center" scope="row">{{i.data_formatada}}</td>
+                      <td class="text-start">{{i.filial.nome}}</th>
+                      <td class="text-center">{{i.tergrasa}}</td>
+                      <td class="text-center">{{i.termasa}}</td>
+                      <td class="text-center">
+                      <input class="botao-salvar" type="reset"
+                          onclick="location.href='/unidades/editar_saldo/{{i.id}}'" value="Alterar">
+                      </td>
+                  </tr>
+                  {% endfor i %}
+                  <tr>
+                      <th colspan="2" class="text-center">Total</th>
+                      <th class="text-center">{{tg}}</th>
+                      <th class="text-center">{{tm}}</th>
+                      <th></th>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
     </div>
-</div>
+      
+      </div>
+      <div class="direita col-sm-6">
+      <div class="home-direita">
+        <div class="alert titulo" role="alert">
+          <strong>Lançar saldo pendente</strong>
+      </div>
+       {#========= Mensagem ============#}
+       {% include "partials/mensagem.html" %}
+       {#================================#}
+      <form action="{% url 'home' %}" method="post">{% csrf_token %}
+          <br>
+          <label for="">Data agendamento:</label>
+          <input type="date" name="data" id="" value="{{ data_atual }}" class="form-control sombra" value="">
+          <br>
+          <label for="">Filiais</label>
+          <select name="filial" class="form-select sombra" id="">
+              <option value="">----------</option>
+              {% for i in filiais %}
+              <option value="{{i.id}}">{{i.nome}}</option>
+              {% endfor %}
+          </select>
+          <br>
+          <label for="">TERGRASA (peso em toneladas)</label>
+          <input type="number" name="tergrasa" class="form-control sombra" value="" placeholder="">
+          <br>
+          <label for="">TERMASA (peso em toneladas)</label>
+          <input type="number" name="termasa" class="form-control sombra" value="" placeholder="">
+          <br>
+          <input type="submit" value=" Salvar  " class="botao-salvar">
+          <a href="{% url 'home' %}" class="botao-cancelar">Cancelar</a>
+      </form>
+    </div>
+      </div>
+    </div>
+  </div>
+</main>
 
-
-{% endblock 'body' %}
-
-
-
-
-
-
-
-
+{% endblock 'principal' %}

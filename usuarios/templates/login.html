@@ -1,84 +1,40 @@
-{% extends "base.html" %} {% load static %} {# =============================
-Corpo ================================== #} {% block 'body' %} {% include
-"partials/navbar.html" %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md d-flex justify-content-center">
-      <div class="cont-cadastro">
-        <br />
-        <br />
-        <section class="cont-logo">
-          <br />
-          <br />
-          {#========= Mensagem ============#} 
-          
-          {% if messages %} 
-          {% for message in messages %}
-          <div
-            class="alert {{message.tags}} alert-dismissible fade show"
-            role="alert"
-          >
-            {{message}}
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
+{% extends "base.html" %} 
+{% load static %}
+{% block 'principal' %}
 
-          {% endfor %}
-           {% endif %} {#================================#}
-          <div
-            class="alert alert"
-            style="
-              font-size: 25px;
-              border: solid 0.5px #f08c00;
-              background-color: #fef3e5;
-              color: #0d8b44;
-            "
-            role="alert"
-          >
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="esquerda col-sm-6">
+        <div class="home-esquerda">
+          <div class="alert titulo" role="alert">
             <strong>Login</strong>
           </div>
-        </section>
-        <form action="{% url 'login' %}" method="POST">
-          {% csrf_token %}
-          <br />
-          <label for="">Username</label>
-          <input
-            type="text"
-            name="username"
-            id=""
-            class="form-control shadow-main-color"
-            placeholder=""
-          />
-          <br />
-          <label for="">Senha</label>
-          <input
-            type="password"
-            name="senha"
-            class="form-control form-control shadow-main-color"
-            placeholder=""
-          />
-          <br />
-          <input
-            type="submit"
-            value="Logar"
-            class="btn btn-success btn-dark-color"
-          />
-          <a href="{% url 'cadastro' %}" class="btn btn-dark-color-outline"
-            >Não possuo uma conta</a
-          >
-        </form>
+         
+          {% include "partials/mensagem.html" %}
+
+          <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <br>
+            <label for="">Username</label>
+            <input type="text" name="username" id="" class="form-control sombra" placeholder="">
+            <br>
+            <label for="">Senha</label>
+            <input type="password" name="senha" class="form-control form-control sombra" placeholder="">
+            <br>
+            <input type="submit" value="Logar" class="botao-salvar">
+            <a href="{% url 'cadastro' %}" class="botao-nao-tenho-conta">Não possuo conta</a>
+          </form>
+        </div>
       </div>
-    </div>
-    <div
-      class="col-md bg-main1 d-flex justify-content-center align-items-center"
-    >
-      <img src="{% static 'img/ilustracao.png' %}" alt="" />
-      <img src="{% static 'img/ilustracao1.png' %}" alt="" />
+
+      <div class="direita col-sm-6">
+        <div class="img-direita">
+          <img class="img-corpo" src="{% static 'img/soja1.jpg' %}" alt="">
+        </div>
+        
     </div>
   </div>
-</div>
-{% endblock 'body' %}
+</main>
+
+{% endblock 'principal' %}

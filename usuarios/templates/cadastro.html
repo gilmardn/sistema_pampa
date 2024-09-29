@@ -1,70 +1,53 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 {% load static %}
+{% block 'principal' %}
 
-{# ============================= Corpo ================================== #}
-{% block 'body' %}
-{% include "partials/navbar.html" %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md d-flex justify-content-center">
-                <div class="cont-cadastro">
-                    <br>
-                    <br>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="esquerda col-sm-6">
+        <div class="home-esquerda">
+            <div class="alert titulo" role="alert">
+                <strong>Cadastre-se</strong>
+            </div>
+         
+          {% include "partials/mensagem.html" %}
 
-                <section class="cont-logo">
-                    <br>
-                     <br>
-                    {#========= Mensagem ============#}
-                    {% if messages %}
-                    {% for message in messages %}
-                      <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
-                        {{message}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-
-                    {% endfor %}
-                   {% endif %}
-                    {#================================#}
-                    <div class="alert alert" style="font-size: 25px; border: solid 0.5px #f08c00; background-color: #fef3e5; color: #0d8b44;" role="alert">
-                        <strong>Cadastre-se</strong>
-                         </div>
-                </section>
-
-
-
-
-                        <br>
-                        <form action="{% url 'cadastro' %}" method="post">{% csrf_token %}
-                        <label for="">Usuario</label>
-                        <input type="text" name="username" id="" class="form-control shadow-main-color" placeholder="">
-                        <br>
-                        <label for="">Nome</label>
-                        <input type="text" name="first_name" id="" class="form-control shadow-main-color" placeholder="">
-                        <br>
-                        <label for="">E-mail</label>
-                        <input type="text" name="email" id="" class="form-control shadow-main-color" placeholder="" >
-                        <br>
-                        <div class="row">
-                            <div class="col-md">
-                                <label for="">Senha</label>
-                                <input type="password" name="senha" class="form-control shadow-main-color" placeholder="">
-                            </div>
-                            <div class="col-md">
-                                <label for="">Confirmar senha</label>
-                                <input type="password" name="confirmar_senha" class="form-control shadow-main-color" placeholder="" id="">
-                            </div>
-                        </div>
-                        <br>
-                        <input type="submit" value="Cadastrar" class="btn btn-success btn-dark-color">
-                        <a href="{% url 'login' %}" class="btn btn-dark-color-outline">Já possuo uma conta</a>
-                    </form>
+          <form action="{% url 'cadastro' %}" method="post">{% csrf_token %}
+            <label for="">Usuario</label>
+            <input type="text" name="username" id="" class="form-control sombra" placeholder="">
+            <br>
+            <label for="">Nome</label>
+            <input type="text" name="first_name" id="" class="form-control sombra" placeholder="">
+            <br>
+            <label for="">E-mail</label>
+            <input type="text" name="email" id="" class="form-control sombra" placeholder="">
+            <br>
+            <div class="row">
+                <div class="col-md">
+                    <label for="">Senha</label>
+                    <input type="password" name="senha" class="form-control sombra" placeholder="">
+                </div>
+                <div class="col-md">
+                    <label for="">Confirmar senha</label>
+                    <input type="password" name="confirmar_senha" class="form-control sombra"
+                        placeholder="" id="">
                 </div>
             </div>
-            <div class="col-md bg-main1 d-flex justify-content-center align-items-center">
-                    <img src="{% static 'img/ilustracao1.png' %}" alt="">
-                    <img src="{% static 'img/ilustracao.png' %}" alt="">
-            </div>
+            <br>
+            <input type="submit" value="Cadastrar" class="botao-salvar">
+                <a href="{% url 'login' %}" class="botao-nao-tenho-conta">Ja possuo conta</a>
+        </form>
         </div>
+      </div>
+
+      <div class="direita col-sm-6">
+        <div class="img-direita">
+          <img class="img-corpo" src="{% static 'img/soja7.jpg' %}" alt="">
+        </div>
+        
     </div>
-{% endblock 'body' %}
-{# ====================================================================== #}
+  </div>
+</main>
+
+{% endblock 'principal' %}

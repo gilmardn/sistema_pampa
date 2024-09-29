@@ -1,78 +1,62 @@
 {% extends "base.html" %} 
-{% load static %} 
-{# =============================Corpo ================================== #} 
-{% block 'body' %} 
-{% include "partials/navbar.html" %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md d-flex justify-content-center">
-      <div class="cont-cadastro">
-        <br />
-        <br />
-        <section class="cont-logo">
-          <br />
-          <br />
-          {#========= Mensagem ============#} 
-          {% if messages %} 
-          {% for message in messages %}
-          <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
-            {{message}}
-            <buttontype="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
+{% load static %}
+{% block 'principal' %}
 
-          {% endfor %} 
-          {% endif %} 
-          {#================================#}
-          <div class="alert alert" style="font-size: 25px; border: solid 0.5px #f08c00; background-color: #fef3e5; color: #0d8b44;" role="alert">
-            <strong>Cadastrar nova filial</strong>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="esquerda col-sm-6">
+        <div class="home-esquerda">
+          <div class="alert titulo" role="alert">
+            <strong>Cadastro de Filiais</strong>
           </div>
-        </section>
-
-        <br />
-        <form action="{% url 'cadastro_filial' %}" method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          <div class="row">
-            <div class="col-md">
-              <label for="">Nome da Filial:</label>
-              <input type="text" class="form-control shadow-main-color" value="" name="nome" placeholder=""/>
+          {% include "partials/mensagem.html" %}
+          <form action="{% url 'cadastro_filial' %}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+            <div class="row">
+              <div class="col-md">
+                <label for="">Nome da Filial:</label>
+                <input type="text" class="form-control sombra" value="" name="nome" placeholder="">
+              </div>
+              <div class="col-md">
+                <label for="">CNPJ</label>
+                <input type="text" name="cnpj" id="" class="form-control sombra">
+              </div>
             </div>
-            <div class="col-md">
-              <label for="">CNPJ</label>
-              <input type="text" name="cnpj" id="" class="form-control shadow-main-color"/>
+            <br>
+            <label for="">Rua</label>
+            <input type="text" name="rua" id="" class="form-control sombra" placeholder="">
+            <br>
+            <div class="row">
+              <div class="col-md">
+                <label for="">Bairro:</label>
+                <input type="text" class="form-control sombra" name="bairro" placeholder="">
+              </div>
+              <div class="col-md">
+                <label for="">Número:</label>
+                <input type="number" name="numero" id="" class="form-control sombra">
+              </div>
             </div>
-          </div>
-          <br />
-          <label for="">Rua</label>
-          <input type="text" name="rua" id="" class="form-control shadow-main-color" placeholder=""/>
-          <br />
-          <div class="row">
-            <div class="col-md">
-              <label for="">Bairro:</label>
-              <input type="text" class="form-control shadow-main-color" name="bairro"  placeholder=""/>
-            </div>
-            <div class="col-md">
-              <label for="">Número:</label>
-              <input type="number" name="numero" id="" class="form-control shadow-main-color" />
-            </div>
-          </div>
-          <br />
-          <label for="">Cidade</label>
-          <input  type="text"  name="cidade" id="" class="form-control shadow-main-color"  placeholder="" />
-          <br />
-          <label for="">Foto de perfil:</label>
-          <input  type="file"  name="foto" id=""  class="form-control shadow-main-color"/>
-          <br />
-          <input type="submit" value="Cadastrar" class="btn btn-info" />
-          <a href="{% url 'login' %}" class="btn btn-outline-info">Voltar</a>
-        </form>
+            <br>
+            <label for="">Cidade</label>
+            <input type="text" name="cidade" id="" class="form-control sombra" placeholder="">
+            <br>
+    
+            <label for="">Foto de perfil:</label>
+            <input type="file" name="foto" id="" class="form-control sombra">
+            <br>
+            <input type="submit" value="Cadastrar" class="botao-salvar">
+            <a href="{% url 'home' %}" class="btn botao-cancelar">Voltar</a>
+          </form>
+        </div>
       </div>
-    </div>
-    <div
-      class="col-md bg-main1 d-flex justify-content-center align-items-center">
-      <img src="{% static 'img/ilustracao1.png' %}" alt="" />
-      <img src="{% static 'img/ilustracao.png' %}" alt="" />
+
+      <div class="direita col-sm-6">
+        <div class="img-direita">
+          <img class="img-corpo" src="{% static 'img/soja1.jpg' %}" alt="">
+        </div>
+        
     </div>
   </div>
-</div>
-{% endblock 'body' %} {#
-====================================================================== #}
+</main>
+
+{% endblock 'principal' %}

@@ -1,5 +1,6 @@
-from pathlib import Path
 import os
+from pathlib import Path
+from django.contrib.messages import constants
 from dotenv import load_dotenv
 
 
@@ -15,7 +16,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 DEBUG = os.environ.get('DEBUG', '') != 'False'
 
 
-ALLOWED_HOSTS = ['.pythonanywhere.com', "*"]
+ALLOWED_HOSTS = ['gilmardn.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -70,10 +71,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # 'NAME': os.getenv('DB_NAME'),
-        'USER': str(os.getenv('DB_USER')),
-        'PASSWORD': str(os.getenv('DB_PASSWORD')),
-        'HOST': str(os.getenv('DB_HOST')),
-        'PORT': str(os.getenv('DB_PORT')),
+        # 'USER': str(os.getenv('DB_USER')),
+        # 'PASSWORD': str(os.getenv('DB_PASSWORD')),
+        # 'HOST': str(os.getenv('DB_HOST')),
+        # 'PORT': str(os.getenv('DB_PORT')),
     }
 }
 
@@ -125,8 +126,6 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Messages
-
-from django.contrib.messages import constants
 
 MESSAGE_TAGS = {
     constants.DEBUG: 'alert-primary',
